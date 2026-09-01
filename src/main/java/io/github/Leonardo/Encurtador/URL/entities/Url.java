@@ -1,11 +1,19 @@
 package io.github.Leonardo.Encurtador.URL.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "urls")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@ToString
 public class Url {
 
     @Id
