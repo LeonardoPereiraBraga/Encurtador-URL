@@ -5,13 +5,13 @@ import io.github.Leonardo.Encurtador.URL.dto.UrlPostResponse;
 import io.github.Leonardo.Encurtador.URL.entities.Url;
 import io.github.Leonardo.Encurtador.URL.service.UrlService;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/url")
@@ -23,5 +23,11 @@ public class UrlController {
     public ResponseEntity<UrlPostResponse> criarUrl(@Valid @RequestBody UrlPostRequest postRequest){
         UrlPostResponse urlEncurtada = urlService.criarUrlEncurtada(postRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(urlEncurtada);
+    }
+    @GetMapping("/{shortCode}")
+    public ResponseEntity<Void> redirecionarParaUrlOriginal(@PathVariable String shortCode){
+        String urlOriginal = urlService.puxarUrlOriginal(shortCode);
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create(urlOriginal)).build();
     }
 }

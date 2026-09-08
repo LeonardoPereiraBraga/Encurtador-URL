@@ -22,4 +22,8 @@ public class UrlService {
         UrlPostResponse postResponse = urlMapper.toUrlPostResponse(urlSalva);
         return postResponse;
     }
+    public String puxarUrlOriginal(String shortCode){
+        Url urlEncontrada = urlRepository.findByShortCode(shortCode);
+        return urlEncontrada.getOriginalUrl();
+    }
 }
