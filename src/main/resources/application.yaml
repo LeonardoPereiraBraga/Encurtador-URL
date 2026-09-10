@@ -9,3 +9,15 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+
+  #Redis
+  cache:
+    type: redis
+  data:
+    redis:
+      port: 6379
+      host: localhost
+      password: RedisPass
+
+
+
