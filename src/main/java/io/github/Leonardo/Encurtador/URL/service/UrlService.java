@@ -1,5 +1,6 @@
 package io.github.Leonardo.Encurtador.URL.service;
 
+import io.github.Leonardo.Encurtador.URL.dto.UrlEvent;
 import io.github.Leonardo.Encurtador.URL.dto.UrlPostRequest;
 import io.github.Leonardo.Encurtador.URL.dto.UrlPostResponse;
 import io.github.Leonardo.Encurtador.URL.entities.Url;
@@ -17,6 +18,7 @@ public class UrlService {
     private final UrlRepository urlRepository;
     private final UrlMapper urlMapper;
 
+
     @Transactional
     @CacheEvict(cacheNames = "urls", allEntries = true)
     public UrlPostResponse criarUrlEncurtada(UrlPostRequest webUrl){
@@ -26,10 +28,13 @@ public class UrlService {
         return postResponse;
     }
 
-    @Cacheable(cacheNames = "urls", key ="#root.method.name")
+
+
+
+    @Cacheable(cacheNames = "urls", key ="#shortCode")
     public String puxarUrlOriginal(String shortCode){
         System.out.println("Nao foi pego no Cache");
-        Url urlEncontrada = urlRepository.findByShortCode(shortCode);
+        Url urlEncontrada = urlRepository.findUrlByShortCode(shortCode);
         return urlEncontrada.getOriginalUrl();
     }
 }

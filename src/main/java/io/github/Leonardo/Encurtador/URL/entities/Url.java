@@ -28,4 +28,7 @@ public class Url {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "click_count")
+    private Long clickCount;
 }

@@ -3,6 +3,7 @@ package io.github.Leonardo.Encurtador.URL.controller;
 import io.github.Leonardo.Encurtador.URL.dto.UrlPostRequest;
 import io.github.Leonardo.Encurtador.URL.dto.UrlPostResponse;
 import io.github.Leonardo.Encurtador.URL.entities.Url;
+import io.github.Leonardo.Encurtador.URL.service.RedirectService;
 import io.github.Leonardo.Encurtador.URL.service.UrlService;
 import jakarta.validation.Valid;
 import lombok.Getter;
@@ -18,6 +19,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class UrlController {
     private final UrlService urlService;
+    private final RedirectService redirectService;
 
     @PostMapping
     public ResponseEntity<UrlPostResponse> criarUrl(@Valid @RequestBody UrlPostRequest postRequest){
@@ -26,8 +28,11 @@ public class UrlController {
     }
     @GetMapping("/{shortCode}")
     public ResponseEntity<Void> redirecionarParaUrlOriginal(@PathVariable String shortCode){
-        String urlOriginal = urlService.puxarUrlOriginal(shortCode);
+
+        String urlOriginal = redirectService.processarRedirect(shortCode);
+
         return ResponseEntity.status(HttpStatus.FOUND)
                 .location(URI.create(urlOriginal)).build();
+
     }
 }

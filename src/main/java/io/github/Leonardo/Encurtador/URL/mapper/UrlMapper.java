@@ -18,7 +18,7 @@ public class UrlMapper {
     public Url toUrl(UrlPostRequest urlPostRequest){
         String shortCode = generateShortCode();
         LocalDateTime createdAt = LocalDateTime.now();
-        Url urlMappeada = new Url(null, shortCode, urlPostRequest.getWebsiteUrl(), createdAt);
+        Url urlMappeada = new Url(null, shortCode, urlPostRequest.getWebsiteUrl(), createdAt,0L);
         return urlMappeada;
     }
 
