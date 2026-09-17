@@ -31,4 +31,7 @@ public class Url {
 
     @Column(name = "click_count")
     private Long clickCount;
+
+    @Column(name = "expires_at")
+    private LocalDateTime expiresAt;
 }
