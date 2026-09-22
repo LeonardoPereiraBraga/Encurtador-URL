@@ -12,4 +12,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private ResponseEntity<String> urlExpiradaHanlder(UrlExpiradaException exception){
         return ResponseEntity.status(HttpStatus.GONE).body(exception.getMessage());
     }
+    @ExceptionHandler(EmailExistenteException.class)
+    private ResponseEntity<String> urlExpiradaHanlder(EmailExistenteException exception){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+    }
 }
