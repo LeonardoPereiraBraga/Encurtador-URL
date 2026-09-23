@@ -8,6 +8,7 @@ import io.github.Leonardo.Encurtador.URL.exception.UrlExpiradaException;
 import io.github.Leonardo.Encurtador.URL.mapper.UrlMapper;
 import io.github.Leonardo.Encurtador.URL.repository.UrlRepository;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
